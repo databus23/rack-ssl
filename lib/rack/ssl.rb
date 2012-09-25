@@ -49,6 +49,7 @@ module Rack
       def redirect_to_https(env)
         req        = Request.new(env)
         url        = URI(req.url)
+        url.port   = nil # clear out the source port, so it doesn't get used as the default
         url.scheme = "https"
         url.host   = @host if @host
         url.port   = @port if @port
